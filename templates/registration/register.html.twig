@@ -1,0 +1,50 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block title %}Register
+{% endblock %}
+
+{% block body %}
+	<h1 class="alert alert-danger font-weight-normal text-center shadow rounded-0 display-1" style="font-family: 'Pacifico', cursive;">Chat-Line</h1>
+	<h1 class="rounded-bottom text-center mt-4" style="font-family: 'Pacifico', cursive;">Register</h1>
+	<div class="col-md-6 mx-auto">
+		{{ form_start(registrationForm) }}
+		<div class="form-group col-6">
+			<label>
+				{{form_label(registrationForm.pseudo)}}
+			</label>
+			<div class="form-control">{{ form_widget(registrationForm.pseudo) }}</div>
+			<small class="form-text text-muted">We'll never share your pseudo with anyone else.</small>
+		</div>
+
+		<div class="form-group col-6 mt-4">
+			<label>
+				{{form_label(registrationForm.plainPassword,'Password')}}
+			</label>
+			<div class="form-control">{{ form_widget(registrationForm.plainPassword, {
+	            	label: 'Password'
+	        		}) }}
+			</div>
+		</div>
+		<div class="form-group col-6 mt-4">
+			<label>{{form_label(registrationForm.repeatPassword)}}
+			</label>
+			<div class="form-control">{{ form_widget(registrationForm.repeatPassword, {
+	            label: 'Repeat Password'
+	        }) }}</div>
+		</div>
+		<div class="row m-4">
+			<label>
+				{{form_label(registrationForm.agreeTerms)}}
+			</label>
+			<div class="form-group">{{ form_widget(registrationForm.agreeTerms) }}</div>
+		</div>
+
+		<button type="submit" class="btn btn-danger">Register</button>
+		{{ form_end(registrationForm) }}
+	</div>
+	<p class="mt-5 mb-4 text-center text-danger">Si vous avez deja un compte
+		<a style="text-decoration: none" href="{{ path('app_login') }}">Log in</a>
+	</p>
+
+
+{% endblock %}

@@ -1,0 +1,85 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block title %}Hello HomeController!
+{% endblock %}
+
+{% block body %}
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+	<h1 class="mb-5 alert alert-danger font-weight-normal text-center shadow rounded-0 display-1" style="font-family: 'Pacifico', cursive;">Chat-Line</h1>
+
+<div class="container">
+<div class="row clearfix">
+    <div class="col-lg-12">
+        <div class="card chat-app">
+            <div id="plist" class="people-list">
+            	<!--Pour la recherche-->
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fa fa-search"></i></span>
+                    </div>
+                    <input type="text" class="form-control" placeholder="Search...">
+                </div>
+                <!--Fin-->
+                <div class="">
+                    <ul class="list-unstyled chat-list mt-2 mb-0">
+                    {% for user in listeUsers %}
+                        <li class="clearfix">
+                            <a href="{{path('app_discuss_user',{'id':user.id})}}" class="js-link" style="text-decoration: none;" name="{{user.id}}">
+                            	<img src="{{(user.imageName ? vich_uploader_asset(user): asset('images/gravatar.png'))|imagine_filter('squared_thumbnail_min')}} " alt="..." class="rounded-circle shadow avatar">
+                            
+    	                        <div class="about">
+    	                            <div class="name"> {{user.pseudo|u.truncate(15,'...',true)}} </div>
+    	                            <div class="status"> <i class="fa fa-circle offline"></i>account {{user.createdAt|ago}} </div>                                            
+    	                        </div>
+    	                    </a>
+                        </li>
+               		{% endfor %}
+                    </ul>
+                </div>
+            </div>
+            <div class="chat">
+                <div class="chat-header clearfix">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <a href="javascript:void(0);" data-toggle="modal" data-target="#view_info">
+                                
+                            </a>
+                            <div class="chat-about">
+                                <h6 class="pseudo m-b-0">
+                                    <span>
+                                        <img src="{{(app.user.imageName ? vich_uploader_asset(app.user): asset('images/gravatar.png'))|imagine_filter('squared_thumbnail_min')}} " alt="..." class="rounded-circle shadow avatar">
+                                    </span>
+                                    <span class="m-3">{{app.user.pseudo}} </span>
+                                </h6>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 hidden-sm text-right">
+                            <a href="{{path('app_edit_user')}}" class="btn btn-outline-info"><i class="fa fa-user"></i></a>
+                            <a href="{{path('app_logout')}}" class="btn btn-outline-warning"><i class="fa fa-sign-out"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="chat-history">
+                    <ul class="history m-b-0">
+                       <h4 class="alert alert-danger text-danger m-5">Welcome to Chat-Line</h4>
+                       <h1 class=" text-center text-info display-4" > discussion </h1>
+                    </ul>
+                </div>
+                <div class="chat-message clearfix">
+                    <div class="input-group mb-0" id="send"> 
+                        <a href="{{path('app_send')}}" class="btn-send btn text-success"><p></p></a>              
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+{% block javascript%}
+    <script src="{{asset('assets/js/axios.js')}}"></script>
+    <script src="{{ asset('assets/js/app.js') }}"></script>
+    <script src="{{ asset('assets/js/moment.js') }}"></script>
+    <script src="{{ asset('assets/js/send_message.js') }}"></script>
+{% endblock %}
+
+{% endblock %}

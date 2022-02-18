@@ -1,0 +1,46 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block title %}Log in!
+{% endblock %}
+
+{% block body %}
+	<form method="post">
+		{% if error %}
+			<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+		{% endif %}
+
+		{% if app.user %}
+			<div class="mb-3">
+				You are logged in as
+				{{ app.user.username }},
+				<a href="{{ path('app_logout') }}">Logout</a>
+			</div>
+		{% endif %}
+
+		<h1 class="alert alert-danger font-weight-normal text-center shadow rounded-0 display-1" style="font-family: 'Pacifico', cursive;">Chat-Line</h1>
+
+		<div class="col-md-6 mx-auto m-5">
+			<h1 class="rounded-bottom" style="font-family: 'Pacifico', cursive;">Please Sign in
+			</h1>
+
+			<div class="form-group mt-5">
+				<label for="inputPseudo">Pseudo</label>
+				<input type="text" value="{{ last_username }}" name="pseudo" id="inputPseudo" class="form-control" autocomplete="username" required autofocus>
+			</div>
+			<div class="form-group mt-5">
+				<label for="inputPassword">Password</label>
+				<input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+			</div>
+
+			<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+
+			<button class="btn btn-lg btn-danger mt-2 btn-block" type="submit">
+				Sign in
+			</button>
+		</div>
+	</form>
+	<p class="text-center text-muted mt-3">Pas encore un compte ?
+		<a href="{{ path('app_register') }}" style="color: red; text-decoration: none">Creer un compte</a>
+	</p>
+{% endblock %}
