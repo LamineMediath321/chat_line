@@ -1,6 +1,6 @@
 # chat_line
 #On clone le depot 
-git clone 
+git clone https://github.com/LamineMediath321/chat_line.git
 #Puis on se deplace dans le dossier 🗃 chat-line
 #On installe les dependances
 composer install
