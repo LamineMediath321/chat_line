@@ -12,4 +12,4 @@ symfony console doctrine:migrations:migrate
 symfony serve -d
 #On lance l'application
 symfony open:local
-#Puis on cree deux utilisateur pour simuler le chat_line
+#Puis on cree deux utilisateurs pour simuler le chat_line
